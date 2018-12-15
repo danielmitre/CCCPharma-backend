@@ -22,10 +22,6 @@ public class Lot {
 	@Column(name = "shelf_life", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date shelfLife;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "barcode")
-    private Product product;
 
     public Lot() {
     	super();
@@ -66,14 +62,6 @@ public class Lot {
     public void setShelfLife(Date shelfLife) {
         this.shelfLife = shelfLife;
     }
-
-    public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
 
 	public boolean isOutOfStock(){
         return amount == 0;
