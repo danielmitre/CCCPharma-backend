@@ -19,8 +19,8 @@ public class Lot implements Serializable {
 
 	private static final long serialVersionUID = 7174865730326679084L;
 
-	@Column(name = "id")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@EmbeddedId
+	@GeneratedValue
 	protected Long id;
 	
 	@Column(name = "amount", nullable = false)
