@@ -44,7 +44,7 @@ public class Product {
     private double price;
     
 	@Column(name = "lots", nullable = false)
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
     private List<Lot> lots;
 
 	public List<Lot> getLots() {
