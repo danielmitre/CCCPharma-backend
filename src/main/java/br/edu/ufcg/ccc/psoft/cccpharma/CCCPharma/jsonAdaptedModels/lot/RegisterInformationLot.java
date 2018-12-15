@@ -1,5 +1,7 @@
 package br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.jsonAdaptedModels.lot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RegisterInformationLot {
@@ -8,10 +10,12 @@ public class RegisterInformationLot {
 	private Date shelfLife;
 	private int amount;
 
-	public RegisterInformationLot(String productBarcode, Date shelfLife, int amount) {
+	final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	
+	public RegisterInformationLot(String productBarcode, String shelfLife, int amount) throws ParseException {
 		super();
 		this.productBarcode = productBarcode;
-		this.shelfLife = shelfLife;
+		this.shelfLife = dateFormat.parse(shelfLife);
 		this.amount = amount;
 	}
 
@@ -27,8 +31,8 @@ public class RegisterInformationLot {
 		return shelfLife;
 	}
 
-	public void setShelfLife(Date shelfLife) {
-		this.shelfLife = shelfLife;
+	public void setShelfLife(String shelfLife) throws ParseException {
+		this.shelfLife = dateFormat.parse(shelfLife);
 	}
 
 	public int getAmount() {

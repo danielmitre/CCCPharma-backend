@@ -165,6 +165,11 @@ public class OperationController {
 	public ResponseEntity<Void> addLot(@Valid @RequestBody AuthenticatedRequest<RegisterInformationLot> request) {
 		authenticateAdmin(request.getUser());
 		RegisterInformationLot lot = request.getData(); 
+		
+		System.out.println("amount: " + lot.getAmount());
+		System.out.println("amount: " + lot.getProductBarcode());
+		System.out.println("shelflife: " + lot.getShelfLife());
+		
 		productController.addLot(
 				lot.getAmount(),
 				lot.getShelfLife(),
@@ -186,7 +191,6 @@ public class OperationController {
 	 */
 	@RequestMapping(value="/category/", method=RequestMethod.PATCH)
 	public ResponseEntity<Void> changeCategoryDiscount(@Valid @RequestBody AuthenticatedRequest<UpdateInformationCategory> request) {
-		System.out.println("request is valid");
 		authenticateAdmin(request.getUser());
 		UpdateInformationCategory category = request.getData();
 		productController.changeCategoryDiscount(
