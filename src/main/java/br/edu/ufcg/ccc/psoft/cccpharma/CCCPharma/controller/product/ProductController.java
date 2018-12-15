@@ -133,7 +133,18 @@ public class ProductController {
 	}
 
 	public List<Product> getInventoryReport() {
-		return this.products;
+		List<Product> productsInfo = new ArrayList<>();
+		
+		System.out.println("products size:" + products.size());
+		
+		for (int i=0; i < this.products.size(); i++) {
+			Product product = products.get(i);
+			productsInfo.add(product);
+		}
+		
+		System.out.println(productsInfo);
+		
+		return productsInfo;
 	}
 
 	private Category getCategory(String categoryType) {

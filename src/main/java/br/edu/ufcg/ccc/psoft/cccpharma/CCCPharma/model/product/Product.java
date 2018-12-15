@@ -218,7 +218,7 @@ public class Product {
     }
     
     public String completeInfo(){
-        String description = "PRODUTO: " + this.name
+        String description = "{PRODUTO: " + this.name
                          + "; FABRICANTE: " + this.company
                          + "; CÓDIGO DE BARRAS: " + this.barcode
                          + "; CATEGORIA: " + this.category.toString();
