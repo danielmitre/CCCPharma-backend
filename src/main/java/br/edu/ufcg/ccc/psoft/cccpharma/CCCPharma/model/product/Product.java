@@ -45,7 +45,7 @@ public class Product {
     
 	@Column(name = "lots", nullable = false)
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	@JoinColumn(name= "barcode")
+	@JoinColumn(name= "product_barcode")
     private List<Lot> lots;
 
 	public List<Lot> getLots() {
