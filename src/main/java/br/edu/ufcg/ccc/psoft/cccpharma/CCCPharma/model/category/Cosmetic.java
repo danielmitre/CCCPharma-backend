@@ -6,7 +6,6 @@ import javax.persistence.Table;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.category.discount.NoDiscount;
 
 @Entity
-@Table(name="category")
 public class Cosmetic extends Category{
 
     public Cosmetic(){

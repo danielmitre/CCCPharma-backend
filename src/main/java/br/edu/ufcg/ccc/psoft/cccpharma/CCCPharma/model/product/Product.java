@@ -43,7 +43,7 @@ public class Product {
     @Column(name = "price", nullable = false)
     private double price;
     
-	@Column
+	@Column(name = "lot")
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "product", fetch = FetchType.EAGER)
     private List<Lot> lots;
 
