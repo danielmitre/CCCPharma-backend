@@ -45,6 +45,10 @@ public class Product {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "product")
     private List<Lot> lots;
 
+	public Product() {
+		super();
+	}
+	
     public Product(String name, String barcode, Category category, String company, String status) throws Conflict409Exception{
         this.name = name;
         this.barcode = barcode;
