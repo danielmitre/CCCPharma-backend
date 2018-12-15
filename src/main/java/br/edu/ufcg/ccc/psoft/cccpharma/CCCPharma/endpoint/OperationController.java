@@ -127,9 +127,6 @@ public class OperationController {
 	 */
 	@RequestMapping(value="/product/", method=RequestMethod.GET)
 	public ResponseEntity<List<PartialInformationProduct>> getProductsInfo() {
-		if (productController == null) {
-			System.out.println("\n\n\n\n\nSomething really wrong is happening\n\n\n\n\n\n");
-		}
 		return ResponseEntity.ok(productController.getProductsInfo());
 	}
 	

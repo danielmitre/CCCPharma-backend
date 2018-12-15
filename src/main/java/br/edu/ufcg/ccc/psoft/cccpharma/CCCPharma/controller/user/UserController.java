@@ -36,6 +36,13 @@ public class UserController {
 	}
 	
 	private HashMap<String, User> loadUsers(){
+		final String rootLogin = "admin";
+		
+		if (!userDAO.existsById(rootLogin)) {
+			final User rootUser = new User("administrador", "admin", "admin", true);
+			userDAO.save(rootUser);
+		}
+		
 		Iterable<User> iterableUsers = this.userDAO.findAll();
 		HashMap<String, User> mappedUsers = new HashMap<String, User>();
 		Iterator<User> it = iterableUsers.iterator();
