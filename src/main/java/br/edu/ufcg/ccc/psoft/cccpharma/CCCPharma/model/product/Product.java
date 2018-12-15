@@ -38,7 +38,6 @@ public class Product {
     private Status status;
     
     @Column(name = "price", nullable = false)
-    @Size(max = 30)
     private double price;
     
 	@Column
