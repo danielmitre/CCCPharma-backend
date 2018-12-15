@@ -240,4 +240,7 @@ public class OperationController {
 	private void authenticateAdmin(VerificationInformationUser user) {
 		authenticator.adminAuthenticate(user.getLogin(), user.getPassword());
 	}
+	
+	
+	
 }

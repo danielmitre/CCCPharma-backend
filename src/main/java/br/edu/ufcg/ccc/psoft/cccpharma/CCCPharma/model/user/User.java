@@ -29,6 +29,8 @@ public class User {
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean isAdmin;
 	
+	public User() {}
+	
 	public User(@NonNull String _name, @NonNull String _login, @NonNull String _password, boolean _isAdmin) {
 		this.name = _name;
 		this.login = _login;

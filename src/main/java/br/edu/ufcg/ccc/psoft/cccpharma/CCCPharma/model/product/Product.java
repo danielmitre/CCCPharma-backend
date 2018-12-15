@@ -30,7 +30,7 @@ public class Product {
     private String company;
     
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
     
     @Enumerated(EnumType.STRING)
