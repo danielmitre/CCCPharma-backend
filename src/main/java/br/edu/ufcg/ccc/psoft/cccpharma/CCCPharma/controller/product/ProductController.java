@@ -133,7 +133,6 @@ public class ProductController {
 	}
 
 	public List<Product> getInventoryReport() {
-		System.out.println(products);
 		return this.products;
 	}
 
