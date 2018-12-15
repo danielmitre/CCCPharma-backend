@@ -75,9 +75,13 @@ public class User {
 	}
 
 	public boolean checkPassword(@NonNull String maybePassword) {
-		System.out.println("excepted password: " + password);
-		System.out.println("found password: " + maybePassword);
-		return password.equals(maybePassword);
+		System.out.println("expected password: " + password);
+		try {
+			System.out.println("found password: " + maybePassword);
+			return password.equals(digestPassword(maybePassword));
+		} catch (NoSuchAlgorithmException e) {
+			return false;
+		}
 	}
 	
 	private String digestPassword(String password) throws NoSuchAlgorithmException {
