@@ -155,28 +155,28 @@ public class ProductController {
 	private HashMap<String, Category> loadCategories() {
 		final long cosmeticId = 1;
 		final long foodId = 3;
-		final long medicationId = 3;
-		final long toiletryId = 4;
+		final long medicationId = 9;
+		final long toiletryId = 7;
 		
 		if (!categoryDAO.existsById(cosmeticId)) {
 			categoryDAO.save(new Cosmetic());
 		}
-		Category cosmetic = this.categoryDAO.findById(cosmeticId).get();
+		Category cosmetic = categoryDAO.findById(cosmeticId).get();
 		
 		if (!categoryDAO.existsById(foodId)) {
 			categoryDAO.save(new Food());
 		}
-		Category food = this.categoryDAO.findById(foodId).get();
+		Category food = categoryDAO.findById(foodId).get();
 		
 		if (!categoryDAO.existsById(medicationId)) {
 			categoryDAO.save(new Medication());
 		}
-		Category medication = this.categoryDAO.findById(medicationId).get();
+		Category medication = categoryDAO.findById(medicationId).get();
 		
 		if (!categoryDAO.existsById(toiletryId)) {
 			categoryDAO.save(new Toiletry());
 		}
-		Category toiletry = this.categoryDAO.findById(toiletryId).get();
+		Category toiletry = categoryDAO.findById(toiletryId).get();
 
 		HashMap<String, Category> categories = new HashMap<String, Category>();
 		categories.put("cosmetic", cosmetic);
