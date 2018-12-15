@@ -75,6 +75,8 @@ public class User {
 	}
 
 	public boolean checkPassword(@NonNull String maybePassword) {
+		System.out.println("excepted password: " + password);
+		System.out.println("found password: " + maybePassword);
 		return password.equals(maybePassword);
 	}
 	
