@@ -22,7 +22,7 @@ public abstract class Category {
 	@GeneratedValue
 	protected Long id;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     protected Discount discount;
 
     
