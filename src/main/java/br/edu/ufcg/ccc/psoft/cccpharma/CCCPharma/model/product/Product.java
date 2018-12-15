@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Proxy;
+
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.customExceptions.client400.BadRequest400Exception;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.customExceptions.client400.Conflict409Exception;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.category.*;
@@ -15,6 +17,7 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.lot.Lot;
 
 @Entity
 @Table(name = "product")
+@Proxy(lazy = false)
 public class Product {
 	
 	@Id
