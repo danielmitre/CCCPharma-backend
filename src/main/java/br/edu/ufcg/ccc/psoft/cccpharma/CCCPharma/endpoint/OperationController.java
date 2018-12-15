@@ -149,8 +149,8 @@ public class OperationController {
 	 */
 	@RequestMapping(value="/product/report/", method=RequestMethod.GET)
 	public ResponseEntity<List<Product>> getInventoryReport(@Valid @RequestBody VerificationInformationUser user) {
-		System.out.println("user: " + user.getLogin());
 		authenticateAdmin(user);
+		System.out.println("user: " + user.getLogin());
 		return ResponseEntity.ok(productController.getInventoryReport());
 	}
 	

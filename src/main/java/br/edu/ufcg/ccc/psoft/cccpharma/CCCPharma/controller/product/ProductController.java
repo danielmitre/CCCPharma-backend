@@ -9,6 +9,7 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.jsonAdaptedModels.product.Parti
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.jsonAdaptedModels.product.PartialInformationUnavailableProduct;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.category.*;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
+import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Status;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.repository.CategoryRepository;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.repository.ProductRepository;
 
@@ -74,8 +75,7 @@ public class ProductController {
 
 		if (product != null) {
 			product.addLot(productAmount, shelfLife);
-			if (product.getStatusInfo().toLowerCase().equals("unavailable"))
-				product.setStatus("Available");
+			product.setStatus("Available");
 			this.productDAO.save(product);
 		} else {
 			throw new BadRequest400Exception("Product is not registered");
@@ -96,7 +96,7 @@ public class ProductController {
 		Product product = getProductByBarcode(barcode);
 
 		if (product != null) {
-			if (product.getStatusInfo().toLowerCase().equals("unavailable"))
+			if (product.getStatus() == Status.Unavailable)
 				throw new Conflict409Exception("There is no lot of this product in stock");
 			else {
 				product.decreaseAmount(amount);
@@ -119,12 +119,18 @@ public class ProductController {
 		
 		for (int i=0; i < this.products.size(); i++) {
 			Product product = products.get(i);
-			if (product.getStatusInfo().toLowerCase().equals("available"))
-				productsInfo.add(new PartialInformationAvailableProduct
-						(product.getName(), product.getPrice(), product.getStatusInfo()));
-			else
-				productsInfo.add(new PartialInformationUnavailableProduct
-						(product.getName(), product.getStatusInfo()));
+			if (product.getStatus() == Status.Available) {
+				productsInfo.add(new PartialInformationAvailableProduct(
+						product.getName(),
+						product.getPrice(),
+						product.getStatus()
+				));
+			} else {
+				productsInfo.add(new PartialInformationUnavailableProduct(
+						product.getName(),
+						product.getStatus()
+				));
+			}
 		}
 		
 		System.out.println(productsInfo);

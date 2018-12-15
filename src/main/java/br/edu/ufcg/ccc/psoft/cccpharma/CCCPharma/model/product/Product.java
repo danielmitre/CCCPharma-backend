@@ -43,9 +43,17 @@ public class Product {
     @Column(name = "price", nullable = false)
     private double price;
     
-	@Column(name = "lot")
+	@Column(name = "lots", nullable = false)
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "product", fetch = FetchType.EAGER)
     private List<Lot> lots;
+
+	public List<Lot> getLots() {
+		return lots;
+	}
+
+	public void setLots(List<Lot> lots) {
+		this.lots = lots;
+	}
 
 	public Product() {
 		super();
@@ -105,15 +113,8 @@ public class Product {
             throw new Conflict409Exception("Status value not defined");
     }
     
-    public void setStatus(Status status) {
+    private void setStatus(Status status) {
     	this.status = status;
-    }
-    
-    public String getStatusInfo(){
-        if (this.status.equals(Status.Available))
-            return "Available";
-        else
-            return "Unavailable";
     }
 
     public Status getStatus() {
