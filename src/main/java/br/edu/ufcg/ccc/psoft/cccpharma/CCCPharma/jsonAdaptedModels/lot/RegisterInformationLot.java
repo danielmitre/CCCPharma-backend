@@ -7,15 +7,15 @@ import java.util.Date;
 public class RegisterInformationLot {
 
 	private String productBarcode;
-	private Date shelfLife;
+	private String shelfLife;
 	private int amount;
 
-	final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	
 	
 	public RegisterInformationLot(String productBarcode, String shelfLife, int amount) throws ParseException {
 		super();
 		this.productBarcode = productBarcode;
-		this.shelfLife = dateFormat.parse(shelfLife);
+		this.shelfLife = shelfLife;
 		this.amount = amount;
 	}
 
@@ -27,12 +27,12 @@ public class RegisterInformationLot {
 		this.productBarcode = productBarcode;
 	}
 
-	public Date getShelfLife() {
+	public String getShelfLife() {
 		return shelfLife;
 	}
 
-	public void setShelfLife(String shelfLife) throws ParseException {
-		this.shelfLife = dateFormat.parse(shelfLife);
+	public void setShelfLife(String shelfLife) {
+		this.shelfLife = shelfLife;
 	}
 
 	public int getAmount() {

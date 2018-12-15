@@ -1,5 +1,7 @@
 package br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.endpoint;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +21,8 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.authentication.Authenticator;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.authentication.ClientAuthenticator;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.controller.product.ProductController;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.controller.user.UserController;
+import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.customExceptions.client400.BadRequest400Exception;
+import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.customExceptions.client400.Conflict409Exception;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.jsonAdaptedModels.Request.AuthenticatedRequest;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.jsonAdaptedModels.category.UpdateInformationCategory;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.jsonAdaptedModels.lot.RegisterInformationLot;
@@ -170,11 +174,18 @@ public class OperationController {
 		System.out.println("amount: " + lot.getProductBarcode());
 		System.out.println("shelflife: " + lot.getShelfLife());
 		
-		productController.addLot(
-				lot.getAmount(),
-				lot.getShelfLife(),
-				lot.getProductBarcode()
-		);
+		final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try {
+			productController.addLot(
+					lot.getAmount(),
+					dateFormat.parse(lot.getShelfLife()),
+					lot.getProductBarcode()
+			);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new BadRequest400Exception("wrong date format");
+		}
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
