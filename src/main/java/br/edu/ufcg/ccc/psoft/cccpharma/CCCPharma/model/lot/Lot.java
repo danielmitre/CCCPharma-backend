@@ -1,5 +1,6 @@
 package br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.lot;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,9 +15,12 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
 
 @Embeddable
 @Proxy(lazy = false)
-public class Lot {
-	@Id
-	@GeneratedValue
+public class Lot implements Serializable {
+
+	private static final long serialVersionUID = 7174865730326679084L;
+
+	@Column(name = "id")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	protected Long id;
 	
 	@Column(name = "amount", nullable = false)
