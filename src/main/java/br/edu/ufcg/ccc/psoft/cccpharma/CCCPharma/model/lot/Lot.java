@@ -15,7 +15,6 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
 @Embeddable
 @Proxy(lazy = false)
 public class Lot {
-	
 	@Id
 	@GeneratedValue
 	protected Long id;
