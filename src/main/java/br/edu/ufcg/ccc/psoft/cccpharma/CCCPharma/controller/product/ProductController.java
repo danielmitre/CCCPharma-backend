@@ -154,7 +154,7 @@ public class ProductController {
 
 	private HashMap<String, Category> loadCategories() {
 		final long cosmeticId = 1;
-		final long foodId = 2;
+		final long foodId = 3;
 		final long medicationId = 3;
 		final long toiletryId = 4;
 		
