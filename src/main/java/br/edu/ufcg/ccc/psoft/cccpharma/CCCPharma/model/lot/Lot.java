@@ -18,8 +18,8 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
 public class Lot {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue
+	protected Long id;
 	
 	@Column(name = "amount", nullable = false)
     private int amount;

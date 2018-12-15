@@ -138,8 +138,13 @@ public class Product {
     public void removeLot(Lot lot) {
     	this.lots.remove(lot);
     }
+  
     
-    public int getAmount() {
+    public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public int getAmount() {
     	int amount = 0;
     	int i = 0;
     	while (i < this.lots.size()) {
@@ -155,7 +160,7 @@ public class Product {
     	if (totalAmount - amount > 0) {
     		int i = 0;
     		while (amount > 0 && i < this.lots.size()) {
-    			Lot closestToOutOfDate = getClosestToShelfLife();
+    			Lot closestToOutOfDate = closestToShelfLife();
     			if(closestToOutOfDate.getAmount() <= amount) {
     				amount -= closestToOutOfDate.getAmount();
     				this.lots.remove(closestToOutOfDate);
@@ -172,7 +177,7 @@ public class Product {
     		throw new BadRequest400Exception("Desired amount is greater than amount of products in stock");
     }
     
-    private Lot getClosestToShelfLife() {
+    private Lot closestToShelfLife() {
     	if (this.lots.size() > 0) {    		
     		Lot closestShelfLifeLot = this.lots.get(0);
     		int i = 0;
@@ -194,7 +199,7 @@ public class Product {
     	}
     }
     
-    private String getLotsToString() {
+    private String lotsToString() {
     	String description = "[";
     	for (int i = 0; i < lots.size() - 1; i++) {
     		description += lots.get(i).toString() + ", ";
@@ -226,7 +231,7 @@ public class Product {
             description += "; SITUAÇÃO: Indisponível";
         
         description += "Nº DE LOTES: " + getAmount();
-        description += "LOTES: " + getLotsToString();
+        description += "LOTES: " + lotsToString();
         
         return description;
     }
