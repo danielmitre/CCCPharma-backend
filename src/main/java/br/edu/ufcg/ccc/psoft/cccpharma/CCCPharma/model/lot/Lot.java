@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Proxy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.customExceptions.client400.BadRequest400Exception;
@@ -12,6 +14,7 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
 
 @Entity
 @Table(name = "lot")
+@Proxy(lazy = false)
 public class Lot {
 	
 	@Id
