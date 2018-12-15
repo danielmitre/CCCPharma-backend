@@ -29,7 +29,6 @@ public class Lot {
     private Date shelfLife;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "barcode")
     @JsonIgnore
     private Product product;
 

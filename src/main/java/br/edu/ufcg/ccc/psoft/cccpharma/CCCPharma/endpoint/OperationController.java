@@ -152,7 +152,6 @@ public class OperationController {
 	public ResponseEntity<List<Product>> getInventoryReport(@Valid @RequestBody VerificationInformationUser user) {
 		authenticateAdmin(user);
 		System.out.println("user: " + user.getLogin());
-		System.out.println(Arrays.toString(productController.getInventoryReport().toArray()));
 		return ResponseEntity.ok(productController.getInventoryReport());
 	}
 	
