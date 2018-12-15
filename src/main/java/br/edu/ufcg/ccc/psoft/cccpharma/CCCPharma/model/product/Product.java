@@ -132,12 +132,10 @@ public class Product {
     public void addLot(int amount, Date shelfLife) throws BadRequest400Exception {
     	Lot lot = new Lot(amount, shelfLife);
     	this.lots.add(lot);
-    	lot.setProduct(this);
     }
     
     public void addLot(Lot lot) {
     	this.lots.add(lot);
-    	lot.setProduct(this);
     }
     
     public void removeLot(Lot lot) {
