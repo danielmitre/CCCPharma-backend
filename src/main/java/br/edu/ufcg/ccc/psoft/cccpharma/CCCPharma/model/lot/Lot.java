@@ -27,6 +27,10 @@ public class Lot {
     @JoinColumn(name = "barcode")
     private Product product;
 
+    public Lot() {
+    	super();
+    }
+    
     public Lot(int amount, Date shelfLife) throws BadRequest400Exception{
         if (amount > 0)
             this.amount = amount;
