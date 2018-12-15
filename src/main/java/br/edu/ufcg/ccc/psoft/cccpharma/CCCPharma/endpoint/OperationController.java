@@ -2,6 +2,7 @@ package br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.endpoint;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -151,6 +152,7 @@ public class OperationController {
 	public ResponseEntity<List<Product>> getInventoryReport(@Valid @RequestBody VerificationInformationUser user) {
 		authenticateAdmin(user);
 		System.out.println("user: " + user.getLogin());
+		System.out.println(Arrays.toString(productController.getInventoryReport().toArray()));
 		return ResponseEntity.ok(productController.getInventoryReport());
 	}
 	
