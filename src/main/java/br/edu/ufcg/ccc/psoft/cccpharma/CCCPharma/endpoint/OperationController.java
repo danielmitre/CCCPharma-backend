@@ -149,7 +149,8 @@ public class OperationController {
 	 */
 	@RequestMapping(value="/product/report/", method=RequestMethod.GET)
 	public ResponseEntity<List<Product>> getInventoryReport(@Valid @RequestBody VerificationInformationUser user) {
-		authenticateAdmin(user);		
+		System.out.println("user: " + user.getLogin());
+		authenticateAdmin(user);
 		return ResponseEntity.ok(productController.getInventoryReport());
 	}
 	
@@ -171,7 +172,7 @@ public class OperationController {
 		RegisterInformationLot lot = request.getData(); 
 		
 		System.out.println("amount: " + lot.getAmount());
-		System.out.println("amount: " + lot.getProductBarcode());
+		System.out.println("productBarcode: " + lot.getProductBarcode());
 		System.out.println("shelflife: " + lot.getShelfLife());
 		
 		final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
