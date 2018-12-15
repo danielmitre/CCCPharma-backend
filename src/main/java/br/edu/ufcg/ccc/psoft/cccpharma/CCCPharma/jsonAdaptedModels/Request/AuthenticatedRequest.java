@@ -15,6 +15,14 @@ public class AuthenticatedRequest<T> {
 		return user;
 	}
 	
+	public void setUser(VerificationInformationUser user) {
+		this.user = user;
+	}
+
+	public void setData(T data) {
+		this.data = data;
+	}
+
 	public T getData() {
 		return data;
 	}

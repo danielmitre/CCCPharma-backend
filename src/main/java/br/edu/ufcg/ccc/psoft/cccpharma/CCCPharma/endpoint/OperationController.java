@@ -186,6 +186,7 @@ public class OperationController {
 	 */
 	@RequestMapping(value="/category/", method=RequestMethod.PATCH)
 	public ResponseEntity<Void> changeCategoryDiscount(@Valid @RequestBody AuthenticatedRequest<UpdateInformationCategory> request) {
+		System.out.println("request is valid");
 		authenticateAdmin(request.getUser());
 		UpdateInformationCategory category = request.getData();
 		productController.changeCategoryDiscount(
