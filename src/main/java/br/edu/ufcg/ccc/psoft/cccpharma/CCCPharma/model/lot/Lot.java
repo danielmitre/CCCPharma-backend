@@ -12,14 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.customExceptions.client400.BadRequest400Exception;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
 
-@Entity
-@Table(name = "lots")
+@Embeddable
 @Proxy(lazy = false)
 public class Lot {
-	
-	@Id
-	@GeneratedValue
-	protected Long id;
 	
 	@Column(name = "amount", nullable = false)
     private int amount;
