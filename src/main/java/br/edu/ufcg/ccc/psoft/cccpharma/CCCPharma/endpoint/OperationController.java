@@ -67,6 +67,17 @@ public class OperationController {
 	public ResponseEntity<Void> addProduct(@Valid @RequestBody AuthenticatedRequest<RegisterInformationProduct> request) {
 		authenticateAdmin(request.getUser());
 		RegisterInformationProduct product = request.getData();
+		
+		System.out.println("product["
+				+ "name=" + product.getName()
+				+ "barcode=" + product.getBarcode()
+				+ "company=" + product.getCompany()
+				+ "cateogory=" + product.getCategory()
+				+ "status=" + product.getStatus()
+				+ "]"
+		);
+		
+		
 		productController.addProduct(
 				product.getName(),
 				product.getBarcode(),

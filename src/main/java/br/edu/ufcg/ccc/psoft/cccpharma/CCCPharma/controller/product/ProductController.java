@@ -147,7 +147,6 @@ public class ProductController {
 	private Product getProductByBarcode(String barcode) {
 		System.out.println("searching for "+ barcode);
 		for (Product product : this.products) {
-			System.out.println("barcode: " + product.getBarcode());
 			if (product.getBarcode().equals(barcode)) {
 				return product;
 			}	
