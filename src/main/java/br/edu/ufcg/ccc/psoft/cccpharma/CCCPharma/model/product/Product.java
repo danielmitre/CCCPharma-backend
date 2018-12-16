@@ -106,12 +106,13 @@ public class Product {
     }
 
     public void setStatus(String status) throws Conflict409Exception{
-        if (status.toLowerCase().equals("available"))
+        if (status.toLowerCase().equals("available")) {
             this.status = Status.Available;
-        else if (status.toLowerCase().equals("unavailable"))
+        } else if (status.toLowerCase().equals("unavailable")) {
             this.status = Status.Unavailable;
-        else
-            throw new Conflict409Exception("Status value not defined");
+        } else {
+            throw new Conflict409Exception("Status value not defined");	
+        }
     }
 
     public Status getStatus() {
