@@ -56,8 +56,17 @@ public class ProductController {
 		Category category = this.categories.get(categoryType);
 		Product product = new Product(name, barCode, category, company, status);
 		
-		this.products.add(product);
-		this.productDAO.save(product);
+		try {
+			this.products.add(product);
+		} catch (RuntimeException e) {
+			System.out.println("Falha ao adicionar na lista");
+		}
+		
+		try {
+			this.productDAO.save(product);
+		} catch (RuntimeException e) {
+			System.out.println("falha ao adicionar no DAO");
+		}
 	}
 
 	public void addLot(int productAmount, Date shelfLife, String barcode)
