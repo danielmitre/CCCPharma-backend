@@ -13,7 +13,7 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.customExceptions.client400.BadR
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
 
 @Entity
-@Table(name = "_lot_")
+@Table(name = "lot")
 @Proxy(lazy = false)
 public class Lot {
 	
