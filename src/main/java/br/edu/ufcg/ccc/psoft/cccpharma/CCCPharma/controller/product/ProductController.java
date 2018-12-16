@@ -49,31 +49,15 @@ public class ProductController {
 			throws Conflict409Exception {
 		
 		if (null != getProductByBarcode(barCode)) {
-			System.out.println("existe um produto com barcode="+getProductByBarcode(barCode).getBarcode());
+			System.out.println("existe um produto com barcode="+getProductByBarcode(barCode));
 			throw new Conflict409Exception("This product is already registered");	
 		}
 
-		
-		Category category = null;
-		try {
-			category = this.categories.get(categoryType);
-		} catch (RuntimeException e) {
-			System.out.println("Falha ao transformar categoria");
-		}		
-		
+		Category category = this.categories.get(categoryType);
 		Product product = new Product(name, barCode, category, company, status);
 		
-		try {
-			this.products.add(product);
-		} catch (RuntimeException e) {
-			System.out.println("Falha ao adicionar na lista");
-		}
-		
-		try {
-			this.productDAO.save(product);
-		} catch (RuntimeException e) {
-			System.out.println("falha ao adicionar no DAO");
-		}
+		this.products.add(product);
+		this.productDAO.save(product);
 	}
 
 	public void addLot(int productAmount, Date shelfLife, String barcode)
@@ -161,7 +145,9 @@ public class ProductController {
 	}
 
 	private Product getProductByBarcode(String barcode) {
+		System.out.println("searching for "+ barcode);
 		for (Product product : this.products) {
+			System.out.println("barcode: " + product.getBarcode());
 			if (product.getBarcode().equals(barcode)) {
 				return product;
 			}	
