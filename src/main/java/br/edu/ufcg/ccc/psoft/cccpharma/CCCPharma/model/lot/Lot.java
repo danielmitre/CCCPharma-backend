@@ -50,7 +50,7 @@ public class Lot {
         return this.shelfLife;
     }
 
-    public String getShelfLifeInfo() {
+    public String shelfLifeInfo() {
         String pattern = "dd-MM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         return simpleDateFormat.format(shelfLife);
@@ -106,6 +106,6 @@ public class Lot {
 
 	@Override
     public String toString(){
-        return "VALIDADE: " + getShelfLifeInfo() + "; " + "Nº DE ITENS: " + this.amount;
+        return "VALIDADE: " + shelfLifeInfo() + "; " + "Nº DE ITENS: " + this.amount;
     }
 }
