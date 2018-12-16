@@ -1,12 +1,9 @@
 package br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.lot;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.*;
-
-import org.hibernate.annotations.Proxy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,14 +11,8 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.customExceptions.client400.BadR
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
 
 @Embeddable
-@Proxy(lazy = false)
-public class Lot implements Serializable {
-
-	private static final long serialVersionUID = 7174865730326679084L;
-
-	@EmbeddedId
-	@GeneratedValue
-	protected Long id;
+@Table(name = "lots_")
+public class Lot {
 	
 	@Column(name = "amount", nullable = false)
     private int amount;
@@ -29,7 +20,7 @@ public class Lot implements Serializable {
 	@Column(name = "shelf_life", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date shelfLife;
-    
+
     public Lot() {
     	super();
     }
@@ -70,6 +61,7 @@ public class Lot implements Serializable {
         this.shelfLife = shelfLife;
     }
 
+
 	public boolean isOutOfStock(){
         return amount == 0;
     }
@@ -83,11 +75,14 @@ public class Lot implements Serializable {
         return this.shelfLife.after(currentTime);
     }
 
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + amount;
+		result = prime * result + ((shelfLife == null) ? 0 : shelfLife.hashCode());
 		return result;
 	}
 
@@ -100,10 +95,12 @@ public class Lot implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Lot other = (Lot) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (amount != other.amount)
+			return false;
+		if (shelfLife == null) {
+			if (other.shelfLife != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!shelfLife.equals(other.shelfLife))
 			return false;
 		return true;
 	}

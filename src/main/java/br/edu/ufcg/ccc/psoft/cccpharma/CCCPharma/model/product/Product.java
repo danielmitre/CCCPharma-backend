@@ -45,6 +45,10 @@ public class Product {
     
 	@Column(name = "lots", nullable = false)
 	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(
+	        name="lots_",
+	        joinColumns=@JoinColumn(name="barcode")
+	)
     private List<Lot> lots;
 
 	public List<Lot> getLots() {
