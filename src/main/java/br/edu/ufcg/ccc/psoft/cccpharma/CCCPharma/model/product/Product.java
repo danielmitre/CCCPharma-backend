@@ -200,7 +200,7 @@ public class Product {
     	while (it.hasNext()) {
     		Lot lot = it.next();
     		if (lot.isOutOfDate() || lot.isOutOfStock()) {
-    			this.lots.remove(lot);
+    			it.remove();
     		}
     	}
     }
