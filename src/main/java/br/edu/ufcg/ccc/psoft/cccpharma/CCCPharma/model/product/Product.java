@@ -2,6 +2,7 @@ package br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.*;
@@ -195,9 +196,12 @@ public class Product {
     }
     
     private void ensureLotsNormality() {
-    	for (Lot lot : this.lots) {
-    		if (lot.isOutOfDate() || lot.isOutOfStock())
+    	Iterator<Lot> it = this.lots.iterator();
+    	while (it.hasNext()) {
+    		Lot lot = it.next();
+    		if (lot.isOutOfDate() || lot.isOutOfStock()) {
     			this.lots.remove(lot);
+    		}
     	}
     }
     
