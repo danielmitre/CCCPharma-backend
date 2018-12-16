@@ -3,11 +3,13 @@ package br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.endpoint;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -149,10 +151,12 @@ public class OperationController {
 	 * @return returns a Json with a {@link List} of {@link Product}
 	 */
 	@RequestMapping(value="/product/report/", method=RequestMethod.GET)
-	public ResponseEntity<List<Product>> getInventoryReport(@Valid @RequestBody VerificationInformationUser user) {
+	public ResponseEntity<Collection<Product>> getInventoryReport(@Valid @RequestBody VerificationInformationUser user) {
 		authenticateAdmin(user);
 		System.out.println("user: " + user.getLogin());
-		return ResponseEntity.ok(productController.getInventoryReport());
+		Collection<Product> report = productController.getInventoryReport();
+		Hibernate.initialize(report);
+		return ResponseEntity.ok(report);
 	}
 	
 	
