@@ -43,22 +43,6 @@ public class ProductController {
 			}
 		}
 		
-		try {
-			populateWithSample();
-		} catch (RuntimeException e) {
-			System.out.println("Impossible to populate:" + e.getMessage());
-			System.out.println(e.getStackTrace());
-			for (int i=0; i<10; i++) {
-				System.out.println();
-			}
-		}
-		
-	}
-
-	private void populateWithSample() {
-		Product comida = new Product("comida", "111010110101", categories.get("food"), "CCCFornecedor", "available");
-		products.add(comida);
-		productDAO.save(comida);
 	}
 	
 	public void addProduct(String name, String barCode, String company, String categoryType, String status)
@@ -120,8 +104,6 @@ public class ProductController {
 
 	public List<PartialInformationProduct> getProductsInfo() {
 		List<PartialInformationProduct> productsInfo = new ArrayList<>();
-		
-		System.out.println("products size:" + products.size());
 		
 		for (int i=0; i < this.products.size(); i++) {
 			Product product = products.get(i);
