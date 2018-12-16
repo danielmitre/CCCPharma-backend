@@ -43,7 +43,6 @@ public class Product {
     @Column(name = "price", nullable = false)
     private double price;
     
-	@Column(name = "lots", nullable = false)
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(
 	        name="lots_",
