@@ -43,9 +43,8 @@ public class Product {
     @Column(name = "price", nullable = false)
     private double price;
     
-	@Column(name = "lots", nullable = false)
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	@JoinColumn(name = "barcode_fk", referencedColumnName = "barcode")
+	@OneToMany(mappedBy="_lot_",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OrderBy("shelf_life")
     private List<Lot> lots;
 
 	public List<Lot> getLots() {
@@ -128,7 +127,7 @@ public class Product {
     }
     
     public void addLot(int amount, Date shelfLife) throws BadRequest400Exception {
-    	Lot lot = new Lot(amount, shelfLife);
+    	Lot lot = new Lot(amount, shelfLife, this);
     	this.lots.add(lot);
     }
     
@@ -150,6 +149,7 @@ public class Product {
     	int i = 0;
     	while (i < this.lots.size()) {
     		amount += this.lots.get(i).getAmount();
+    		i++;
     	}
     	return amount;
     }
@@ -187,6 +187,7 @@ public class Product {
     			if (lot.getShelfLife().before(closestShelfLifeLot.getShelfLife())) {
     				closestShelfLifeLot = lot;
     			}
+    			i++;
     		}
     		return closestShelfLifeLot;
     	} else

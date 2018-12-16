@@ -13,7 +13,7 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.customExceptions.client400.BadR
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
 
 @Entity
-@Table(name = "lots")
+@Table(name = "_lot_")
 @Proxy(lazy = false)
 public class Lot {
 	
@@ -28,11 +28,22 @@ public class Lot {
     @Temporal(TemporalType.DATE)
     private Date shelfLife;
     
+	
+	@ManyToOne
+	@JsonIgnore
+	private Product product;
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
     public Lot() {
     	super();
     }
     
-    public Lot(int amount, Date shelfLife) throws BadRequest400Exception{
+    public Lot(int amount, Date shelfLife, Product product) throws BadRequest400Exception{
         if (amount > 0)
             this.amount = amount;
         else
@@ -40,6 +51,8 @@ public class Lot {
         this.shelfLife = shelfLife;
         if(!checkShelfLife())
             throw new BadRequest400Exception("Shelf life cannot be before or equal to current time");
+        
+        this.product = product;
     }
 
     public int getAmount() {
