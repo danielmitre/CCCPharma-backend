@@ -11,7 +11,6 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.customExceptions.client400.BadR
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
 
 @Embeddable
-@Table(name = "lots_")
 public class Lot {
 	
 	@Column(name = "amount", nullable = false)
