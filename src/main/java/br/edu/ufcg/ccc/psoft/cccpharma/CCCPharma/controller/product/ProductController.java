@@ -53,7 +53,14 @@ public class ProductController {
 			throw new Conflict409Exception("This product is already registered");	
 		}
 
-		Category category = this.categories.get(categoryType);
+		
+		Category category = null;
+		try {
+			category = this.categories.get(categoryType);
+		} catch (RuntimeException e) {
+			System.out.println("Falha ao transformar categoria");
+		}		
+		
 		Product product = new Product(name, barCode, category, company, status);
 		
 		try {
