@@ -1,8 +1,8 @@
 package br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -46,13 +46,13 @@ public class Product {
 	@Column(name = "lots", nullable = false)
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "barcode_fk", referencedColumnName = "barcode")
-    private List<Lot> lots;
+    private Collection<Lot> lots;
 
-	public List<Lot> getLots() {
+	public Collection<Lot> getLots() {
 		return lots;
 	}
 
-	public void setLots(List<Lot> lots) {
+	public void setLots(Collection<Lot> lots) {
 		this.lots = lots;
 	}
 
@@ -148,7 +148,7 @@ public class Product {
     	int amount = 0;
     	int i = 0;
     	while (i < this.lots.size()) {
-    		amount += this.lots.get(i).getAmount();
+    		amount += ((ArrayList<Lot>) this.lots).get(i).getAmount();
     	}
     	return amount;
     }
@@ -179,10 +179,10 @@ public class Product {
     
     private Lot closestToShelfLife() {
     	if (this.lots.size() > 0) {    		
-    		Lot closestShelfLifeLot = this.lots.get(0);
+    		Lot closestShelfLifeLot = ((ArrayList<Lot>) this.lots).get(0);
     		int i = 0;
     		while (i < this.lots.size()) {
-    			Lot lot = this.lots.get(i);
+    			Lot lot = ((ArrayList<Lot>) this.lots).get(i);
     			if (lot.getShelfLife().before(closestShelfLifeLot.getShelfLife())) {
     				closestShelfLifeLot = lot;
     			}
@@ -202,9 +202,9 @@ public class Product {
     private String lotsToString() {
     	String description = "[";
     	for (int i = 0; i < lots.size() - 1; i++) {
-    		description += lots.get(i).toString() + ", ";
+    		description += ((ArrayList<Lot>) this.lots).get(i).toString() + ", ";
     	}
-    	description += this.lots.get(this.lots.size() - 1).toString() + "]";
+    	description += ((ArrayList<Lot>) this.lots).get(this.lots.size() - 1).toString() + "]";
     	return description;
     }
 
