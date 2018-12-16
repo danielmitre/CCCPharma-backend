@@ -49,6 +49,7 @@ public class ProductController {
 			throws Conflict409Exception {
 		
 		if (null != getProductByBarcode(barCode)) {
+			System.out.println("existe um produto com barcode="+getProductByBarcode(barCode).getBarcode());
 			throw new Conflict409Exception("This product is already registered");	
 		}
 
