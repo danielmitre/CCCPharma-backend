@@ -48,7 +48,7 @@ public class ProductController {
 	public void addProduct(String name, String barCode, String company, String categoryType, String status)
 			throws Conflict409Exception {
 		
-		if (productDAO.existsById(barCode)) {
+		if (null != getProductByBarcode(barCode)) {
 			throw new Conflict409Exception("This product is already registered");	
 		}
 

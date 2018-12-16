@@ -173,14 +173,14 @@ public class Product {
     	} else if (totalAmount - amount == 0) {
     		this.lots = new ArrayList<Lot>();
     	} else {
-    		System.out.println("desired amount is greater than amount of products in stock");
     		throw new BadRequest400Exception("Desired amount is greater than amount of products in stock");
     	}
     }
     
     private Lot closestToShelfLife() {
+    	Lot closestShelfLifeLot = null;
     	if (this.lots.size() > 0) {    		
-    		Lot closestShelfLifeLot = this.lots.get(0);
+    		closestShelfLifeLot = this.lots.get(0);
     		int i = 0;
     		while (i < this.lots.size()) {
     			Lot lot = this.lots.get(i);
@@ -188,10 +188,9 @@ public class Product {
     				closestShelfLifeLot = lot;
     			}
     			i++;
-    		}
-    		return closestShelfLifeLot;
-    	} else
-    		return null;
+    		}	
+    	}
+    	return closestShelfLifeLot;
     }
     
     public void ensureLotsNormality() {

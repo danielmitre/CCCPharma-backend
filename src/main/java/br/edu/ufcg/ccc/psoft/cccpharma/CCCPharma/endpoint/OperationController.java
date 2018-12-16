@@ -82,7 +82,7 @@ public class OperationController {
 	 * <p><ul>
 	 * <li>URL route: /product/change_price/</li>
      * <li>HTTP method: PATCH</li>
-     * <li>Request's body: {user:{login, password}, data:{barcode, price}}  </li>
+     * <li>Request's body: {user:{login, password}, data:{barcode, newPrice}}  </li>
      * <li>Possibles response status: 200, 400, 401, 403  </li>
 	 * </ul></p>
 	 *
