@@ -1,5 +1,6 @@
 package br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +19,10 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.lot.Lot;
 @Entity
 @Table(name = "product")
 @Proxy(lazy = false)
-public class Product {
+public class Product implements Serializable {
 	
+	private static final long serialVersionUID = 8725857367039223055L;
+
 	@Id
 	@Column(name = "barcode")
 	private String barcode;
@@ -43,7 +46,7 @@ public class Product {
     @Column(name = "price", nullable = false)
     private double price;
     
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(
 	        name="lots_",
 	        joinColumns=@JoinColumn(name="barcode")
