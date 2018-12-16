@@ -43,7 +43,7 @@ public class Product {
     @Column(name = "price", nullable = false)
     private double price;
     
-	@OneToMany(mappedBy="_lot_",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="product",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@OrderBy("shelf_life")
     private List<Lot> lots;
 
