@@ -156,8 +156,6 @@ public class Product {
     }
     
     public void decreaseAmount(int amount) throws BadRequest400Exception {
-    	ensureLotsNormality();
-    	
     	int totalAmount = getAmount();
     	if (totalAmount - amount > 0) {
     		int i = 0;
@@ -196,7 +194,7 @@ public class Product {
     		return null;
     }
     
-    private void ensureLotsNormality() {
+    public void ensureLotsNormality() {
     	Iterator<Lot> it = this.lots.iterator();
     	while (it.hasNext()) {
     		Lot lot = it.next();

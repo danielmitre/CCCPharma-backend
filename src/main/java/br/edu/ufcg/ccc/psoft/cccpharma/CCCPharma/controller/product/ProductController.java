@@ -89,11 +89,16 @@ public class ProductController {
 			if (product.getStatus() == Status.Unavailable)
 				throw new Conflict409Exception("There is no lot of this product in stock");
 			else {
+				product.ensureLotsNormality();
+				this.productDAO.save(product);
+				
 				product.decreaseAmount(amount);
 				this.productDAO.save(product);
 			}
-		} else
+		} else {
+			System.out.println("Product is not registered");
 			throw new BadRequest400Exception("Product is not registered");
+		}
 	}
 
 	public void changeCategoryDiscount(String categoryType, double discount) {

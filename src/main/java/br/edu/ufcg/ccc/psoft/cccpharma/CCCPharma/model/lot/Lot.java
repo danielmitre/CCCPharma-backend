@@ -86,7 +86,7 @@ public class Lot {
     }
 
     public boolean isOutOfDate(){
-        return checkShelfLife();
+        return !checkShelfLife();
     }
 
     private boolean checkShelfLife() {
