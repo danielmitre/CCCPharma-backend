@@ -151,10 +151,10 @@ public class OperationController {
 	 * @return returns a Json with a {@link List} of {@link Product}
 	 */
 	@RequestMapping(value="/product/report/", method=RequestMethod.GET)
-	public ResponseEntity<Collection<Product>> getInventoryReport(@Valid @RequestBody VerificationInformationUser user) {
+	public ResponseEntity<List<Product>> getInventoryReport(@Valid @RequestBody VerificationInformationUser user) {
 		authenticateAdmin(user);
 		System.out.println("user: " + user.getLogin());
-		Collection<Product> report = productController.getInventoryReport();
+		List<Product> report = productController.getInventoryReport();
 		Hibernate.initialize(report);
 		return ResponseEntity.ok(report);
 	}
