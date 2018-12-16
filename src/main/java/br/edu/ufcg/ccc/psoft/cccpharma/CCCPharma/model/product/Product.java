@@ -168,15 +168,16 @@ public class Product {
     				this.lots.remove(closestToOutOfDate);
     				i++;
     			} else {
-    				int auxliaryAmount = amount;
+    				closestToOutOfDate.decreaseAmount(amount);
     				amount = 0;
-    				closestToOutOfDate.decreaseAmount(auxliaryAmount);
     			}
     		}
     	} else if (totalAmount - amount == 0) {
     		this.lots = new ArrayList<Lot>();
-    	} else
+    	} else {
+    		System.out.println("desired amount is greater than amount of products in stock");
     		throw new BadRequest400Exception("Desired amount is greater than amount of products in stock");
+    	}
     }
     
     private Lot closestToShelfLife() {

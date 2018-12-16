@@ -140,8 +140,9 @@ public class ProductController {
 
 	private Product getProductByBarcode(String barcode) {
 		for (Product product : this.products) {
-			if (product.getBarcode().equals(barcode))
+			if (product.getBarcode().equals(barcode)) {
 				return product;
+			}	
 		}
 		return null;
 	}
