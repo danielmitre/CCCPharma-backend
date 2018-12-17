@@ -254,9 +254,18 @@ public class OperationController {
 	 * @return returns a {@link RegisterInformationUser} of the {@link User}
 	 */
 	@RequestMapping(value="/user/login/", method=RequestMethod.GET)
-	public ResponseEntity<User> login(@Valid @RequestBody VerificationInformationUser user) {
+	public ResponseEntity<RegisterInformationUser> login(@Valid @RequestBody VerificationInformationUser user) {
 		authenticator.userAuthenticate(user.getLogin(), user.getPassword());
-		return ResponseEntity.ok(userController.getUserByLogin(user.getLogin()));
+		
+		User realUser = userController.getUserByLogin(user.getLogin());
+		RegisterInformationUser returnUser = new RegisterInformationUser(
+				realUser.getLogin(),
+				realUser.getName(),
+				user.getPassword()	// It's important to return the same password that was passed and not the hashed one 
+		);
+		returnUser.setAdmin(realUser.isAdmin());
+		
+		return ResponseEntity.ok(returnUser);
 	}
 	
 	
