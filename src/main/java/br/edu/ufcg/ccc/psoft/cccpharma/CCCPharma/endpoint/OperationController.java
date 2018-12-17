@@ -76,7 +76,11 @@ public class OperationController {
 				product.getCategory(),
 				product.getStatus()
 		);
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		
+		return ResponseEntity
+				.status(HttpStatus.CREATED)
+				.header("Access-Control-Allow-Origin", "*")
+				.build();
 	}
 	
 	/**
@@ -98,7 +102,11 @@ public class OperationController {
 				product.getNewPrice(),
 				product.getBarcode()
 		);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header("Access-Control-Allow-Origin", "*")
+				.build();
 	}
 	
 	/**
@@ -120,7 +128,11 @@ public class OperationController {
 				product.getRemoveAmount(),
 				product.getBarcode()
 		);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header("Access-Control-Allow-Origin", "*")
+				.build();
 	}
 	
 	/**
@@ -136,7 +148,10 @@ public class OperationController {
 	 */
 	@RequestMapping(value="/product/", method=RequestMethod.GET)
 	public ResponseEntity<List<PartialInformationProduct>> getProductsInfo() {
-		return ResponseEntity.ok(productController.getProductsInfo());
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header("Access-Control-Allow-Origin", "*")
+				.body(productController.getProductsInfo());
 	}
 	
 	/**
@@ -158,7 +173,11 @@ public class OperationController {
 		System.out.println("user: " + user.getLogin());
 		List<Product> report = productController.getInventoryReport();
 		Hibernate.initialize(report);
-		return ResponseEntity.ok(report);
+		
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header("Access-Control-Allow-Origin", "*")
+				.body(report);
 	}
 	
 	
@@ -194,7 +213,10 @@ public class OperationController {
 			e.printStackTrace();
 			throw new BadRequest400Exception("wrong date format");
 		}
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		return ResponseEntity
+				.status(HttpStatus.CREATED)
+				.header("Access-Control-Allow-Origin", "*")
+				.build();
 	}
 	
 	/**
@@ -216,7 +238,10 @@ public class OperationController {
 				category.getCategoryClass(),
 				category.getNewDiscount()
 		);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header("Access-Control-Allow-Origin", "*")
+				.build();
 	}
 	
 	/**
@@ -238,7 +263,10 @@ public class OperationController {
 				user.getPassword(),
 				false
 	    );
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		return ResponseEntity
+				.status(HttpStatus.CREATED)
+				.header("Access-Control-Allow-Origin", "*")
+				.build();
 	}
 	
 	/**
@@ -265,7 +293,10 @@ public class OperationController {
 		);
 		returnUser.setAdmin(realUser.isAdmin());
 		
-		return ResponseEntity.ok(returnUser);
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.header("Access-Control-Allow-Origin", "*")
+				.body(returnUser);
 	}
 	
 	
@@ -282,11 +313,17 @@ public class OperationController {
 	 * @return returns an 200 status response if the user is in use and an 200 status response if the user is available 
 	 */
 	@RequestMapping(value="/user/", method=RequestMethod.GET)
-	public ResponseEntity<Void> addUser(@Valid @RequestBody ExistanceInformationUser user) {
+	public ResponseEntity<Void> addUser(@Valid @RequestBody ExistanceInformationUser user) {		
 		if (userController.checkRegistered(user.getLogin())) {
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			return ResponseEntity
+					.status(HttpStatus.OK)
+					.header("Access-Control-Allow-Origin", "*")
+					.build();
 		}
-		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		return ResponseEntity
+				.status(HttpStatus.NOT_FOUND)
+				.header("Access-Control-Allow-Origin", "*")
+				.build();
 	}
 	
 	private void authenticateAdmin(VerificationInformationUser user) {
