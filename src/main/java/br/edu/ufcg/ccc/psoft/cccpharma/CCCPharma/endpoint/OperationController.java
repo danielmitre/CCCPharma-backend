@@ -32,6 +32,7 @@ import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.jsonAdaptedModels.lot.RegisterI
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.jsonAdaptedModels.product.*;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.jsonAdaptedModels.user.*;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.product.Product;
+import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.model.user.User;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.repository.CategoryRepository;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.repository.ProductRepository;
 import br.edu.ufcg.ccc.psoft.cccpharma.CCCPharma.repository.*;
@@ -239,6 +240,25 @@ public class OperationController {
 	    );
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
+	
+	/**
+	 * Checks if {@link User} is registered and returns its information
+	 * <p><ul>
+	 * <li>URL route: /user/login/</li>
+	 * <li>HTTP method: GET</li>
+	 * <li>Request's body: {login, password}</li>
+	 * <li>Possibles response status: 200, 400</li>
+	 * </ul></p>
+	 * 
+	 * @param user expects a valid {@link VerificationInformationUser}
+	 * @return returns a {@link RegisterInformationUser} of the {@link User}
+	 */
+	@RequestMapping(value="/user/login/", method=RequestMethod.GET)
+	public ResponseEntity<User> login(@Valid @RequestBody VerificationInformationUser user) {
+		authenticator.userAuthenticate(user.getLogin(), user.getPassword());
+		return ResponseEntity.ok(userController.getUserByLogin(user.getLogin()));
+	}
+	
 	
 	/**
 	 * Checks if the login is used by any {@link User}
